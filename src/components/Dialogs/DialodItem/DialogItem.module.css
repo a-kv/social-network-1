@@ -11,6 +11,7 @@
 .dialogsItems {
     padding: 10px;
     color: mediumseagreen;
+    text-decoration: none;
 }
 .dialogsItems .active {
     color: gold;
@@ -19,9 +20,18 @@
 
 .messages {
     padding: 10px;
+
 }
 
 .messages .message {
     color: rebeccapurple;
+
+}
+/*img {*/
+/*    height: 35px;*/
+/*}*/
+.dialog img {
+    width: 40px;
+    border-radius: 45;
 
 }

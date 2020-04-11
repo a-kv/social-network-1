@@ -16,9 +16,28 @@
   grid-area: c;
   background-color: white;
   border-radius: 7px;
+}
+textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  background: #E9EFF6;
+  line-height: 40px;
+  border-width: 0;
+  border-radius: 7px;
+  font-family: 'Roboto', sans-serif
+}
 
+button {
+  color: white;
+  content: "";
+  width: 70px;
+  height: 40px;
+  background: rebeccapurple;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif
 
 }
+
 
 
 

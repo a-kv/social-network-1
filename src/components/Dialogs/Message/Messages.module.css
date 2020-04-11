@@ -8,10 +8,11 @@
 
 }
 
-.dialogsItems {
-    padding: 10px;
-    color: mediumseagreen;
-}
+/*.dialogsItems {*/
+/*    padding: 10px;*/
+/*    color: rebeccapurple;*/
+/*    text-decoration: none;*/
+/*}*/
 .dialogsItems .active {
     color: gold;
 
