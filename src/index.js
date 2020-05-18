@@ -5,25 +5,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {Provider} from "react-redux";
-
+import StoreContext from "./StoreContext";
 
 let rerenderEntireTree = (state) => {
+    
     ReactDOM.render(
         <BrowserRouter>
-            <Provider store={store}>
+            <StoreContext.Provider value={store}>
             <App
                 // state={store.getState()}
                 //  dispatch={store.dispatch.bind(store)}
                 //  store={store}
             />
-            </Provider>
+            </StoreContext.Provider>
         </BrowserRouter>, document.getElementById('root'));
 }
-rerenderEntireTree ();
+rerenderEntireTree (store.getState());
 store.subscribe( () => {
-
-    rerenderEntireTree();
+    let state = store.getState();
+    rerenderEntireTree(state);
 });
 
 //API - application program interfase
