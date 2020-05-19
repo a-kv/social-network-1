@@ -4,6 +4,7 @@ import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
 
+
 let mapStateProps = (state) => {
     return {
         posts: state.profilePage.posts,

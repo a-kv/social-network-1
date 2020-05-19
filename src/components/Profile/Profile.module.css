@@ -1,8 +1,14 @@
 .content {
+    display: grid;
     grid-area: c;
     background-color: lightskyblue;
     border-radius: 7px;
 
+
+    /*max-width: 950px;*/
+    margin: 0 auto;
+
+    /*grid-template-columns: 2fr 10fr;*/
 }
 .ava {
     width: 50px;

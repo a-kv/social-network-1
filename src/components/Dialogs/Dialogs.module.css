@@ -8,7 +8,6 @@
     grid-template-columns: 2fr 10fr;
 }
 
-
 .dialog {
 
 }
@@ -17,7 +16,6 @@
     grid-areas: d;
 
     text-decoration: none;
-
     padding: 10px;
     color: rebeccapurple;
 
