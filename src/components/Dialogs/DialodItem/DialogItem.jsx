@@ -7,8 +7,10 @@ const DialogItem = (props) => {
     let path = "/dialogs/" + props.id;
 
     return <div className={classes.dialog + ' ' + classes.active}>
-                 <img className={classes.ava} src= "https://image.flaticon.com/icons/svg/194/194938.svg"/>
-        <NavLink to={path}>{props.name}</NavLink>
+        <div className={classes.dialogItem}>
+            <img className={classes.ava} src="https://image.flaticon.com/icons/svg/194/194938.svg"/>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
     </div>
 
 }

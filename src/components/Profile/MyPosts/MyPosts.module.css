@@ -3,9 +3,11 @@
 }
 .posts {
     margin-top: 10px;
+    background: #E9EFF6;
 }
-.addNewPost {
+.addNewPost textarea{
     padding: 0 20px;
+    background-color: white;
 }
 .buttonAddPost {
     text-align: right;

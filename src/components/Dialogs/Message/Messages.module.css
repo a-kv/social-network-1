@@ -1,28 +1,11 @@
 
-.dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-}
-
-.dialog {
-
-}
-
-/*.dialogsItems {*/
-/*    padding: 10px;*/
-/*    color: rebeccapurple;*/
-/*    text-decoration: none;*/
-/*}*/
-.dialogsItems .active {
-    color: gold;
-
-}
-
 .messages {
     padding: 10px;
+
 }
 
-.messages .message {
-    color: rebeccapurple;
+.message {
+  background-color: white;
+  height: 53px;
 
 }
