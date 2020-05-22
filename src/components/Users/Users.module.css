@@ -1,6 +1,7 @@
 
-.selectedPage{
+.selectedPage span{
     font-weight: bold;
+    cursor: pointer;
 }
 .usersAvatar img{
     height: 100px;
