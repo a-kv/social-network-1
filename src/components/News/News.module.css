@@ -1,6 +1,6 @@
-.app-wrapper-content {
+.container {
     grid-area: c;
-    background-color: lightskyblue;
+    background-color: white;
     border-radius: 7px;
-
+    height: 100vh;
 }

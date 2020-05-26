@@ -1,11 +1,10 @@
 
-.dialogs {
+.container {
     display: grid;
-    grid-template-areas: d  m;
-    max-width: 950px;
-    margin: 0 auto;
-
+    grid-template-areas: d m;
     grid-template-columns: 2fr 10fr;
+
+
 }
 
 .dialog {
@@ -14,7 +13,6 @@
 
 .dialogsItems  {
     grid-areas: d;
-    text-decoration:;
     padding: 10px;
     color: rebeccapurple;
 
@@ -28,7 +26,6 @@
 
 .messages {
     grid-areas: m;
-
     padding: 10px;
     text-align: right;
 }

@@ -20,7 +20,7 @@ const Dialogs = (props) => {
         props.updateNewMessageBody(body);
     }
 
-    return <div className={classes.dialogs}>
+    return <div className={classes.container}>
         <div className={classes.dialogsItems}>
             {dialogsElements}
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import userPhoto from "../../assets/ava.gif";
 import classes from "./Users.module.css";
+import {NavLink} from "react-router-dom";
 
 
 let UsersC = (props) => {
@@ -12,7 +13,7 @@ let UsersC = (props) => {
         pages.push(i)
     }
 
-    return <div>
+    return <div className={classes.container}>
         <div>
             {pages.map(p => {
                 return <span className={props.currentPage === p && classes.selectedPage}
@@ -24,7 +25,9 @@ let UsersC = (props) => {
         {props.users.map(u => <div key={u.id}>
         <span className={classes.users}>
             <div className={classes.usersAvatar}>
+                <NavLink to={'/profile/userId'}>
                 <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={classes.userPhoto}/>
+                </NavLink>
             </div>
             <div>
                 {u.followed
@@ -42,8 +45,8 @@ let UsersC = (props) => {
                    <div>{u.status}</div>
                 </span>
                 {/*<span>*/}
-                {/*  <div>{'u.location.country'}</div>*/}
-                {/*  <div>{'u.location.city'}</div>*/}
+                {/*  <div>{u.location.country}</div>*/}
+                {/*  <div>{u.location.city}</div>*/}
                 {/*</span>*/}
               </span>
         </div>)}

@@ -1,5 +1,11 @@
-
-.selectedPage span{
+.container{
+    grid-area: c;
+    background-color: white;
+    border-radius: 7px;
+    min-height: 100vh;
+    padding: 10px;
+}
+.selectedPage{
     font-weight: bold;
     cursor: pointer;
 }
