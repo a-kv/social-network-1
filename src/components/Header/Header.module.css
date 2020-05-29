@@ -1,10 +1,18 @@
 
-
 .header {
     grid-area: h;
     background-color: #8584ae;
     border-radius: 7px;
 }
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+}
+
 .header img {
     width: 50px;
     border-radius: 7px;
