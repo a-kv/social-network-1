@@ -1,5 +1,7 @@
-const SET_USER_DATA = 'SET_USER_DATA';
+import * as axios from "axios";
+import {usersAPI} from "../api/api";
 
+const SET_USER_DATA = 'SET_USER_DATA';
 
 
 let initialState = {
@@ -22,7 +24,19 @@ const auhtReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}, userId})
+export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}, userId})
 
+export const getAuth = (userId) => {
+    return (dispatch) => {
+        usersAPI.getAuth(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data
+                    dispatch(setAuthUserData(id, email, login));
+                }
+            });
+
+    }
+}
 
 export default auhtReducer;
