@@ -8,8 +8,11 @@ import {
     toggleFollowingInProgress,
     unfollow,
 } from "../../redux/users-reducer";
-import UsersC from "./UsersC";
 import Preloader from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {Redirect} from "react-router-dom";
+import UsersC from "./UsersC";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 class UsersContainer extends React.Component {
@@ -23,7 +26,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-
+        if (!this.props.isAuth) return <Redirect to="/login"/>
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersC
@@ -49,20 +52,44 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    setUsersTotalCount,
-    toggleFollowingInProgress,
-    getUsers
-})(UsersContainer);
+
+// let AuthRedirect = withAuthRedirect(UsersContainer);
+
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        setUsersTotalCount,
+        toggleFollowingInProgress,
+        getUsers
+    }),
+    withAuthRedirect,
+
+)(UsersContainer);
+
+// export default connect(mapStateToProps, (mapStateToProps, {follow, unfollow, setCurrentPage, setUsersTotalCount,toggleFollowingInProgress,getUsers}))(UsersContainer);
 
 
+// export default connect(mapStateToProps, {
+//     follow,
+//     unfollow,
+//     setCurrentPage,
+//     setUsersTotalCount,
+//     toggleFollowingInProgress,
+//     getUsers
+// })(UsersContainer);
+
+// export default compose(
+//     withAuthRedirect,
+//     connect(mapStateToProps, {follow, unfollow, setCurrentPage, setUsersTotalCount,toggleFollowingInProgress,getUsers})
+// )(UsersContainer);
+
+//
 // let MapDispatchToProps = (dispatch) => {
 //     return {
 //         follow: (userId) => {
@@ -85,7 +112,7 @@ export default connect(mapStateToProps, {
 //         }
 //     }
 // }
-
+//
 
 
 

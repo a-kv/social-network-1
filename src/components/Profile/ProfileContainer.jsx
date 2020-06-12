@@ -1,25 +1,25 @@
 import React from 'react';
 import classes from "./Profile.module.css";
 import Profile from "./Profile";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {getUserProfile, setUserProfile} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {getUserProfile} from "../../redux/profile-reducer";
+import {Redirect, withRouter} from "react-router-dom";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+        debugger
         let userId = this.props.match.params.userId;
-        if(!userId) {
+        if (!userId) {
             userId = 14;
         }
         this.props.getUserProfile(userId);
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
-        //     .then(response => {
-        //         this.props.setUserProfile(response.data)
-        //     });
     }
+
     render() {
+        if (this.props.isAuth === false) return <Redirect to="/login"/>;
         return (
             <div className={classes.content}>
                 <Profile {...this.props} profile={this.props.profile}/>
@@ -28,10 +28,48 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapDispatchToProps = (state) => ({
-    profile: state.profilePage.profile
+
+
+let mapStateToProps = (state) => ({
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
+
 });
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+export default compose(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
 
-export default connect(mapDispatchToProps, {setUserProfile, getUserProfile})(WithUrlDataContainerComponent);
+
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+//let WithUrlDataContainerComponent = withRouter(withAuthRedirect(ProfileContainer));
+//
+
+// export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
+
+
+
+
+
+
+
+// (props) => {
+// if (!this.props.isAuth) return <Redirect to='/login'/>
+// return <ProfileContainer {...props}/>
+// let mapStateToPropsForRedirect = (state) => ({
+//     isAuth: state.auth.isAuth
+// });
+
+
+// compose(
+//     connect(mapDispatchToProps, {getUserProfile}),
+//     withRouter,
+//     withAuthRedirect
+// )(ProfileContainer)
+
+
+// let AuthRedirect = withAuthRedirect(ProfileContainer)
+
+// export default connect(mapDispatchToProps, {getUserProfile})(ProfileContainer);

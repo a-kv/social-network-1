@@ -2,8 +2,6 @@ import React from 'react';
 import userPhoto from "../../assets/ava.gif";
 import classes from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {usersAPI} from "../../api/api";
 
 
 let UsersC = (props) => {
@@ -17,7 +15,7 @@ let UsersC = (props) => {
     return <div className={classes.container}>
         <div>
             {pages.map(p => {
-                return <span className={props.currentPage === p && classes.selectedPage}
+                return <span className={props.currentPage === p ? '' : 'selectedPage'}
                              onClick={(e) => {
                                  props.onPageChanged(p);
                              }}> {p} </span>
@@ -33,12 +31,15 @@ let UsersC = (props) => {
             <div>
                 {u.followed
                     ? <button disabled={props.followingInProgress
-                        .some(id => id === u.id) }
-                              onClick={() => {props.follow(true, u.id)}}>
+                        .some(id => id === u.id)}
+                              onClick={() => {
+                                  props.follow(true, u.id)
+                              }}>
                         Unfollow</button>
                     : <button disabled={props.followingInProgress
-                        .some(id => id === u.id) } onClick={() => {
-                                  props.unfollow(true, u.id)}}>
+                        .some(id => id === u.id)} onClick={() => {
+                        props.unfollow(true, u.id)
+                    }}>
                         Follow</button>}
             </div>
         </span>

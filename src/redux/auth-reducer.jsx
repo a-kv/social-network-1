@@ -1,4 +1,3 @@
-import * as axios from "axios";
 import {usersAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -26,7 +25,7 @@ const auhtReducer = (state = initialState, action) => {
 }
 export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}, userId})
 
-export const getAuth = (userId) => {
+export const getAuthUserData = (userId) => {
     return (dispatch) => {
         usersAPI.getAuth(userId)
             .then(response => {
