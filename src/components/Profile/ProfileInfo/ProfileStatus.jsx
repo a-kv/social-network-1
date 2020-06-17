@@ -2,7 +2,8 @@ import React from 'react';
 
 class ProfileStatus extends React.Component {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -21,7 +22,23 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false,
         })
+        this.props.updateStatus(this.state.status);
     }
+
+    updateStatus = (e) => {
+       this.setState({status: e.currentTarget.value})
+    }
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        //каждый раз когда с компонентом происходят изменения, вызывается CDU и перерисовывает локально компонент
+        if(prevProps.status !== this.props.status) {
+            this.setState({
+                    status: this.props.status
+                })
+        }
+    }
+
 
     render() {
         return (
@@ -31,7 +48,7 @@ class ProfileStatus extends React.Component {
                         <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                     </div>
                     : <div>
-                        <input autoFocus onBlur={this.deactivateEditMode} value={this.props.status}></input>
+                        <input onChange={this.updateStatus} autoFocus onBlur={this.deactivateEditMode} value={this.state.status}></input>
                     </div>}
             </div>
         )

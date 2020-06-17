@@ -17,14 +17,31 @@ export const usersAPI = {
             });
     },
     unfollow(userId) {
-        return instance.delete(`follow${userId}`);
+        return instance.delete(`follow/${userId}`);
     },
     follow(userId) {
-        return instance.post(`follow${userId}`);
+        return instance.post(`follow/${userId}`);
     },
+    getUserProfile(userId) {
+        console.warn('error')
+        return profileAPI.getUserProfile( userId);
+    },
+}
+
+//1. формируем API
+export const profileAPI = {
     getUserProfile(userId) {
         return instance.get(`profile/` + userId);
     },
+    getStatus(userId){
+        return instance.get(`profile/status/` + userId);
+    },
+    updateStatus(status){
+        return instance.put(`profile/status/`, {status: status} );
+    }
+}
+export const authAPI = {
+
     getAuth() {
         return instance.get(`auth/me`);
 
