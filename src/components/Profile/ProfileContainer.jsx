@@ -42,34 +42,3 @@ export default compose(
     withAuthRedirect
 )(ProfileContainer);
 
-
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-//let WithUrlDataContainerComponent = withRouter(withAuthRedirect(ProfileContainer));
-//
-
-// export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
-
-
-
-
-
-
-
-// (props) => {
-// if (!this.props.isAuth) return <Redirect to='/login'/>
-// return <ProfileContainer {...props}/>
-// let mapStateToPropsForRedirect = (state) => ({
-//     isAuth: state.auth.isAuth
-// });
-
-
-// compose(
-//     connect(mapDispatchToProps, {getUserProfile}),
-//     withRouter,
-//     withAuthRedirect
-// )(ProfileContainer)
-
-
-// let AuthRedirect = withAuthRedirect(ProfileContainer)
-
-// export default connect(mapDispatchToProps, {getUserProfile})(ProfileContainer);

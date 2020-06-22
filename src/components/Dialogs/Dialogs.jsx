@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css';
 import Messages from "./Message/Messages";
 import DialogItem from "./DialodItem/DialogItem"
 import {Redirect} from "react-router-dom";
+import  {AddMessageReduxForm} from "./AddMessageForm";
 
 const Dialogs = (props) => {
 
@@ -10,17 +11,13 @@ const Dialogs = (props) => {
 
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
     let messagesElements = state.messages.map(m => <Messages message={m.message} key={m.id}/>);
-    let newMessageBody = state.newMessageBody;
 
-    let addMessage = () => {
-        props.sendMessage();
+    let addMessage = (values) => {
+        props.sendMessage(values.newMessageBody)
+        // props.sendMessage(values.newMessageBody);
     }
 
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
-    if(!props.isAuth) return <Redirect to={"/login"}/>;
+    if (!props.isAuth) return <Redirect to={"/login"}/>;
 
     return <div className={classes.container}>
         <div className={classes.dialogsItems}>
@@ -28,21 +25,11 @@ const Dialogs = (props) => {
         </div>
         <div className={classes.messages}>
             <div>{messagesElements}</div>
-            <div>
-                <div className={classes.sendMessage}>
-                    <textarea placeholder='Enter your massage...'
-                              onChange={onNewMessageChange}
-                              value={newMessageBody}> </textarea>
-                </div>
-                <div>
-                    <button
-                        onClick={addMessage}
-                        className={classes.sendMessage}>
-                        Send
-                    </button>
-                </div>
-            </div>
         </div>
+        <AddMessageReduxForm onSubmit={addMessage}/>
     </div>
 }
+
 export default Dialogs;
+
+
