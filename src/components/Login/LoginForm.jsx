@@ -5,10 +5,10 @@ import {required} from "../../utils/validator/validators";
 
 export const LoginForm = (props) => {
     return <form onSubmit={props.handleSubmit}>
-        <div><Field type="text" placeholder={' Login'} component={Input} name={"login"} validate={[required]}/></div>
+        <div><Field type="text" placeholder={' Email'} component={Input} name={"email"} validate={[required]}/></div>
         {/*component from redux-form*/}
         <div><Field type="password" placeholder={' Password'} component={Input} name={"password"} validate={[required]}/></div>
-        <div>Remember me<Field type="checkbox" component={'input'} name={"rememberMe"}/></div>
+        <div>Remember me<Field type="checkbox" component={Input} name={"rememberMe"}/></div>
         <div>
             <button>Login</button>
         </div>
