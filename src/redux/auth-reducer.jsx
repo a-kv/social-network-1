@@ -1,4 +1,5 @@
 import {authAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -10,7 +11,7 @@ let initialState = {
     isAuth: false
 };
 
-const auhtReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_USER_DATA:
@@ -22,11 +23,14 @@ const auhtReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}})
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuth}
+})
 
 export const getAuthUserData = () => {
     return (dispatch) => {
-        authAPI.getAuth()
+        return authAPI.getAuth()
             .then(response => {
                 if (response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data
@@ -41,6 +45,10 @@ export const login = (email, password, rememberMe) => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData()); // после логинизации еще раз запускаем getAuthUserData
+                } else {
+                    let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+                    dispatch(stopSubmit('login', {_error: message}));
+                    // в качестве общей для формы ошибки устанавливаем мессаджес, если массив больше нуля
                 }
             });
 
@@ -58,4 +66,4 @@ export const logout = () => {
     }
 }
 
-export default auhtReducer;
+export default authReducer;

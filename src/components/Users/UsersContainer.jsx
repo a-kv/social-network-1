@@ -68,66 +68,9 @@ export default compose(
         toggleFollowingInProgress,
         getUsers
     }),
-    withAuthRedirect,
+    // withAuthRedirect,
 
 )(UsersContainer);
-
-// export default connect(mapStateToProps, (mapStateToProps, {follow, unfollow, setCurrentPage, setUsersTotalCount,toggleFollowingInProgress,getUsers}))(UsersContainer);
-
-
-// export default connect(mapStateToProps, {
-//     follow,
-//     unfollow,
-//     setCurrentPage,
-//     setUsersTotalCount,
-//     toggleFollowingInProgress,
-//     getUsers
-// })(UsersContainer);
-
-// export default compose(
-//     withAuthRedirect,
-//     connect(mapStateToProps, {follow, unfollow, setCurrentPage, setUsersTotalCount,toggleFollowingInProgress,getUsers})
-// )(UsersContainer);
-
-//
-// let MapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
