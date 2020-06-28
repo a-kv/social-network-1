@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {
     follow,
-    getUsers,
+    requestUsers,
     setCurrentPage,
     setUsersTotalCount,
     toggleFollowingInProgress,
@@ -12,7 +12,14 @@ import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {Redirect} from "react-router-dom";
 import UsersC from "./UsersC";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selector";
 
 
 class UsersContainer extends React.Component {
@@ -22,11 +29,11 @@ class UsersContainer extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber);
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to="/login"/>
+        // if (!this.props.isAuth) return <Redirect to="/login"/>
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersC
@@ -45,19 +52,28 @@ class UsersContainer extends React.Component {
 
 }
 
+// let mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress,
+//     }
+// }
+
+//use selectors
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
-
-
-// let AuthRedirect = withAuthRedirect(UsersContainer);
 
 export default compose(
     connect(mapStateToProps, {
@@ -66,10 +82,8 @@ export default compose(
         setCurrentPage,
         setUsersTotalCount,
         toggleFollowingInProgress,
-        getUsers
+        getUsers: requestUsers
     }),
-    // withAuthRedirect,
-
 )(UsersContainer);
 
 

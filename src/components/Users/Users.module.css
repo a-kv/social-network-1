@@ -7,9 +7,11 @@
 }
 .selectedPage{
     font-weight: bold;
-    cursor: pointer;
 }
 .usersAvatar img{
     height: 100px;
     border-radius: 50px;
+}
+.pages{
+    cursor: pointer;
 }

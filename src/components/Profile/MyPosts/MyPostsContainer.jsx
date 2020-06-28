@@ -11,7 +11,7 @@ let mapStateProps = (state) => {
         isAuth: state.auth.isAuth
     }
 }
- let mapDispatchProps = (dispatch) => {
+let mapDispatchProps = (dispatch) => {
     return {
         addPost: (newPostText) => {
             dispatch(addPostActionCreator(newPostText));
