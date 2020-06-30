@@ -1,8 +1,10 @@
 
 .preloader {
     grid-area: c;
+    height: 100vh;
     align-self: center;
     justify-self: center;
+
 
 }
 

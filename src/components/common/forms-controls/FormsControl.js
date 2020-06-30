@@ -1,16 +1,18 @@
 import React from "react";
 import classes from './FormsControl.module.css';
+import {required} from "../../../utils/validator/validators";
+import {Field} from "redux-form";
 
-const FormControl = ({input, meta, child, ...props}) => { //таким способом мы достаем из пропсов всё, кроме мета и инпута
+const FormControl = ({input, meta:{touched, error}, children}) => { //таким способом мы достаем из пропсов всё, кроме мета и инпута
 
-    const hasError = meta.touched && meta.error
+    const hasError = touched && error
     return (
         <div className={classes.formControl + " " + (hasError ? classes.error : "")}>
             <div>
-                {props.children}
+                {children}
                 {/*<textarea {...input} {...props}/>*/}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
@@ -24,3 +26,8 @@ export const Input = (props) => {
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 
 }
+export const createField = (placeholder, name, validator, component, props = {}, text = '') =>(
+    <div><Field placeholder={placeholder} component={component} name={name}
+           validate={validator}
+        {...props}/>{text}</div>
+)
