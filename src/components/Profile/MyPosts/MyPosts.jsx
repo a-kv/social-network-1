@@ -4,10 +4,12 @@ import Post from "./Post/Post";
 import {AddNewPostReduxForm} from "./AddNewPostForm";
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
 
     let postsElement =
-        props.posts.map(p => <Post message={p.message}  key={p.id} likesCount={p.likesCount}/>);
+        [...props.posts] // не можем изменять объект на прямую, делаем копию
+            .reverse()
+            .map(p => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef();
 
@@ -22,5 +24,6 @@ const MyPosts = (props) => {
             {postsElement}
         </div>
     </div>
-}
+});
+
 export default MyPosts;

@@ -12,13 +12,13 @@ import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {Redirect} from "react-router-dom";
 import UsersC from "./UsersC";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount,
-    getUsers
+    getTotalUsersCount
 } from "../../redux/users-selector";
 
 
@@ -29,11 +29,11 @@ class UsersContainer extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        this.props.getUsers(pageNumber);
     }
 
     render() {
-        // if (!this.props.isAuth) return <Redirect to="/login"/>
+        if (!this.props.isAuth) return <Redirect to="/login"/>
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersC
@@ -66,7 +66,7 @@ class UsersContainer extends React.Component {
 //use selectors
 let mapStateToProps = (state) => {
     return {
-        users: getUsers(state),
+        users: requestUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -74,6 +74,9 @@ let mapStateToProps = (state) => {
         followingInProgress: getFollowingInProgress(state),
     }
 }
+
+
+// let AuthRedirect = withAuthRedirect(UsersContainer);
 
 export default compose(
     connect(mapStateToProps, {
@@ -84,6 +87,8 @@ export default compose(
         toggleFollowingInProgress,
         getUsers: requestUsers
     }),
+    // withAuthRedirect,
+
 )(UsersContainer);
 
 
