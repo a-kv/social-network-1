@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -10,10 +10,11 @@ import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initialazeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 class App extends React.Component {    //refactor to class component ctrl+alt+shift+t
 
@@ -48,12 +49,24 @@ class App extends React.Component {    //refactor to class component ctrl+alt+sh
     }
 }
 
+
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
 
-export default compose(
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initialazeApp}))
 (App);
+
+
+const MainApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default MainApp;
