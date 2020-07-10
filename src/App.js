@@ -7,14 +7,18 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Login from "./components/Login/Login";
 import UsersContainer from "./components/Users/UsersContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initialazeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
+import {withSuspense} from "./hoc/withSuspense";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+
 
 class App extends React.Component {    //refactor to class component ctrl+alt+shift+t
 
@@ -33,11 +37,9 @@ class App extends React.Component {    //refactor to class component ctrl+alt+sh
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer
-                           />}/>
+                           render={withSuspense(ProfileContainer)}/>
                     <Route path='/dialogs'
-                           render={() => <DialogsContainer
-                           />}/>
+                           render={withSuspense(DialogsContainer)}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

@@ -9,7 +9,7 @@ const MyPosts = React.memo(props => {
     let postsElement =
         [...props.posts] // не можем изменять объект на прямую, делаем копию
             .reverse()
-            .map(p => <Post message={p.message} key={p.id} likesCount={p.likesCount}/>);
+            .map(p => <Post key={p.id} message={p.message} key={p.id} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef();
 

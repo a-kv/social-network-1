@@ -10,15 +10,14 @@ import {
 } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
-import {Redirect} from "react-router-dom";
 import Users from "./Users";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {
     getCurrentPage,
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount, getUsers
+    getTotalUsersCount,
+    getUsers
 } from "../../redux/users-selector";
 
 

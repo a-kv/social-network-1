@@ -15,6 +15,9 @@ export const Login = (props) => {
     }
     return <div>
         <h1>Login</h1>
+        to start using the application in test mode, enter
+        Email: free@samuraijs.com
+        Password: free
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
