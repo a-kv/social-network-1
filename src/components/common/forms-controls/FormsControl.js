@@ -1,6 +1,5 @@
 import React from "react";
 import classes from './FormsControl.module.css';
-import {required} from "../../../utils/validator/validators";
 import {Field} from "redux-form";
 
 const FormControl = ({input, meta:{touched, error}, children}) => { //таким способом мы достаем из пропсов всё, кроме мета и инпута
@@ -10,7 +9,6 @@ const FormControl = ({input, meta:{touched, error}, children}) => { //таким
         <div className={classes.formControl + " " + (hasError ? classes.error : "")}>
             <div>
                 {children}
-                {/*<textarea {...input} {...props}/>*/}
             </div>
             {hasError && <span>{error}</span>}
         </div>

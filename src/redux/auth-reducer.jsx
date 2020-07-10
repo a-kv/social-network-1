@@ -1,8 +1,6 @@
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-
-const SET_USER_DATA = 'SET_USER_DATA';
-
+const SET_USER_DATA = './auth-reducer/SET_USER_DATA';
 
 let initialState = {
     usersId: null,
@@ -46,7 +44,6 @@ export const login = (email, password, rememberMe) => async (dispatch) => {
         // в качестве общей для формы ошибки устанавливаем мессаджес, если массив больше нуля
     }
 }
-
 
 export const logout = () => async (dispatch) => {
     let response = await authAPI.logout()

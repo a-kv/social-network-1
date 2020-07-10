@@ -1,6 +1,5 @@
 import * as axios from "axios";
 
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -24,7 +23,7 @@ export const usersAPI = {
     },
     getUserProfile(userId) {
         console.warn('error')
-        return profileAPI.getUserProfile( userId);
+        return profileAPI.getUserProfile(userId);
     },
 }
 
@@ -33,13 +32,13 @@ export const profileAPI = {
     getUserProfile(userId) {
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId){
+    getStatus(userId) {
         return instance.get(`profile/status/` + userId);
     },
-    updateStatus(status){
-        return instance.put(`profile/status/`, {status: status} );
+    updateStatus(status) {
+        return instance.put(`profile/status/`, {status: status});
     },
-    savePhoto(photoFile){
+    savePhoto(photoFile) {
         const formData = new FormData();
         formData.append('image', photoFile)
         return instance.put(`profile/photo`, formData, {
@@ -48,8 +47,8 @@ export const profileAPI = {
             }
         });// need use content-type for file
     },
-    saveProfile(profile){
-        return instance.put(`profile`, profile );
+    saveProfile(profile) {
+        return instance.put(`profile`, profile);
     }
 }
 export const authAPI = {
@@ -57,7 +56,7 @@ export const authAPI = {
         return instance.get(`auth/me`);
     },
     login(email, password, rememberMe = false) {
-        return instance.post(`auth/login`, { email, password, rememberMe});
+        return instance.post(`auth/login`, {email, password, rememberMe});
     },
     logout() {
         return instance.delete(`auth/login`);
