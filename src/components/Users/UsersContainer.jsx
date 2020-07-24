@@ -19,6 +19,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/users-selector";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 class UsersContainer extends React.Component {

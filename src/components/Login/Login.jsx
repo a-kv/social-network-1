@@ -8,7 +8,7 @@ export const Login = (props) => {
 
 
     const onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }// из пропсов вызываем логин и вызываем по этим же именем приходит колбек, который внутри себя диспатчит вызов санк криейтора, колл бэк принимает эти параметры и передает их в санк криейтор
 
     if (props.isAuth) {
@@ -20,12 +20,14 @@ export const Login = (props) => {
             Email: free@samuraijs.com
             Password: free
         </div>
-        <LoginReduxForm onSubmit={onSubmit}/>
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
     </div>
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
+
 })
 
 export default connect(mapStateToProps, {login})(Login); // здесть логин как санк криэйтор
